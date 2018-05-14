@@ -7,26 +7,41 @@ package com.buyi.pay.exception;
  * @since 1.0.0
  */
 public enum PayExceptionCode {
-	SUCCESS("0000"),
+	SUCCESS("0000", "成功"),
 
-	WARN_TIMEOUT("1001"),
+	WARN_TIMEOUT("1001", "请求超时"),
 
-	WARN_DEALING("1002"),
+	WARN_DEALING("1002", "处理中"),
 
-	/** 不支持的通道 */
-	ERROR_NOT_SUPPORT_CHANNEL("2001"),
+	ERROR_NOT_SUPPORT_CHANNEL("2001", "不支持的通道"),
+
+	ERROR_NOT_FOUND_ORDER("2002", "没有相应订单"),
+
+	ERROR_ILL_PARAM("2003", "非法参数"),
 
 	/** 网络异常 */
-	ERROR_NET("9999");
+	ERROR_NET("9999", "网络异常");
 
-	private String value;
+	private String code;
+	private String desc;
 
-	private PayExceptionCode(String value) {
-		this.value = value;
+	private PayExceptionCode(String code, String desc) {
+		this.code = code;
+		this.desc = desc;
 	}
 
-	public String getValue() {
-		return value;
+	public String getCode() {
+		return code;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public BusiException exp() {
+		BusiException exception = new BusiException();
+		exception.setCode(getCode());
+		return exception;
 	}
 
 }

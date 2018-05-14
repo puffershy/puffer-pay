@@ -14,6 +14,11 @@ import com.buyi.pay.common.enums.ChannelType;
  */
 @Component
 @Channel(ChannelType.QUICK_PAY)
-public class QuickPayService extends ChannelAdapter {
+public class QuickPayService extends ChannelComposite {
+
+	@Override
+	public ChannelType getChannelType() {
+		return ChannelType.ALL_IN_PAY;
+	}
 
 }
