@@ -2,6 +2,8 @@ package com.buyi.pay.vo.support;
 
 import java.util.Date;
 
+import com.buyi.pay.exception.BusiException;
+
 /**
  * 数据绑定抽象类
  * 
@@ -10,6 +12,12 @@ import java.util.Date;
  * @since 1.0.0
  */
 public abstract class DataBinder {
+
+	/**
+	 * 异常
+	 */
+	private BusiException exception;
+
 	/**
 	 * 请求路径
 	 */
@@ -47,6 +55,14 @@ public abstract class DataBinder {
 	 */
 	public abstract String getRspMsg();
 
+	public BusiException getException() {
+		return exception;
+	}
+
+	public void setException(BusiException exception) {
+		this.exception = exception;
+	}
+
 	public String getUrl() {
 		return url;
 	}
@@ -77,5 +93,17 @@ public abstract class DataBinder {
 
 	public void setReqDate(Date reqDate) {
 		this.reqDate = reqDate;
+	}
+
+	/**
+	 * 判断是否异常
+	 * 
+	 * @author buyi
+	 * @date 2018年5月14日下午11:47:15
+	 * @since 1.0.0
+	 * @return 如果异常，则返回true;否则，返回false;
+	 */
+	public boolean isError() {
+		return exception != null;
 	}
 }
