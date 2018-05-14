@@ -17,7 +17,7 @@ import com.google.common.collect.Maps;
  * @since 1.0.0
  */
 public abstract class ChannelComposite implements ChannleService {
-	private final Map<ChannelType, ChannelComposite> adapter = Maps.newHashMap();
+	private final Map<ChannelType, ChannelComposite> adapter = Maps.newConcurrentMap();
 
 	/**
 	 * 获取渠道类型
@@ -28,6 +28,16 @@ public abstract class ChannelComposite implements ChannleService {
 	 * @return
 	 */
 	public abstract ChannelType getChannelType();
+
+	public ChannelComposite() {
+		setAdapter(getChannelType(), this);
+	}
+
+	public void setAdapter(ChannelType channelType, ChannelComposite service) {
+		if (adapter.get(channelType) == null) {
+			adapter.put(channelType, service);
+		}
+	}
 
 	/**
 	 * 根据类型获取相应支付通道

@@ -2,7 +2,6 @@ package com.buyi.pay.service.channel;
 
 import org.springframework.stereotype.Component;
 
-import com.buyi.pay.common.annotation.Channel;
 import com.buyi.pay.common.enums.ChannelType;
 
 /**
@@ -13,7 +12,6 @@ import com.buyi.pay.common.enums.ChannelType;
  * @since 1.0.0
  */
 @Component
-@Channel(ChannelType.QUICK_PAY)
 public class QuickPayService extends ChannelComposite {
 
 	@Override
