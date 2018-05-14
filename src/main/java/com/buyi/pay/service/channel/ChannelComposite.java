@@ -55,6 +55,11 @@ public abstract class ChannelComposite implements ChannleService {
 	@Override
 	public DataBinder payout(PayoutReq req) {
 		DataBinder binder = new PayoutDataBinder();
+		
+		if(req.getChannelType() == null){
+			throw PayExceptionCode.ERROR_ILL_PARAM.exp();
+		}
+		
 		ChannelComposite channleService = getChannleService(req.getChannelType());
 
 		channleService.payoutHandler(req, binder);
