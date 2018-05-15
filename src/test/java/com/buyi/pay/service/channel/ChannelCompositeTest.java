@@ -22,8 +22,6 @@ public class ChannelCompositeTest {
 		PayoutReq payoutReq = PayoutReq.newInstance().channelType(ChannelType.ALL_IN_PAY);
 
 		channleService.payout(payoutReq);
-
-		channleService.payout(payoutReq);
 	}
 
 }

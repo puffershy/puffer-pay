@@ -3,6 +3,7 @@ package com.buyi.pay.vo.support;
 import java.util.Date;
 
 import com.buyi.pay.exception.BusiException;
+import com.buyi.pay.exception.PayExceptionCode;
 
 /**
  * 数据绑定抽象类
@@ -16,7 +17,7 @@ public abstract class DataBinder {
 	/**
 	 * 异常
 	 */
-	private BusiException exception;
+	private Exception exception;
 
 	/**
 	 * 请求路径
@@ -45,6 +46,8 @@ public abstract class DataBinder {
 	 */
 	public abstract String getRspCode();
 
+	public abstract void setRspCode(String code);
+
 	/**
 	 * 获取响应描述信息
 	 *
@@ -55,11 +58,13 @@ public abstract class DataBinder {
 	 */
 	public abstract String getRspMsg();
 
-	public BusiException getException() {
+	public abstract void setRspMsg(String msg);
+
+	public Exception getException() {
 		return exception;
 	}
 
-	public void setException(BusiException exception) {
+	public void setException(Exception exception) {
 		this.exception = exception;
 	}
 
@@ -105,5 +110,15 @@ public abstract class DataBinder {
 	 */
 	public boolean isError() {
 		return exception != null;
+	}
+
+	public void setResult(String code, String msg) {
+		setRspCode(code);
+		setRspMsg(msg);
+	}
+
+	public void setResult(PayExceptionCode code) {
+		setRspCode(code.getCode());
+		setRspMsg(code.getDesc());
 	}
 }

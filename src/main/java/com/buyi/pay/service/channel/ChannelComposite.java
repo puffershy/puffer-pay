@@ -1,5 +1,6 @@
 package com.buyi.pay.service.channel;
 
+import java.net.SocketTimeoutException;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -9,6 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.buyi.pay.common.enums.ChannelType;
+import com.buyi.pay.exception.BusiException;
 import com.buyi.pay.exception.PayExceptionCode;
 import com.buyi.pay.vo.support.DataBinder;
 import com.buyi.pay.vo.support.PayoutDataBinder;
@@ -70,14 +72,24 @@ public class ChannelComposite implements ChannleService {
 	@Override
 	public DataBinder payout(PayoutReq req) {
 		DataBinder binder = new PayoutDataBinder();
+		try {
+			if (req.getChannelType() == null) {
+				throw PayExceptionCode.ERROR_ILL_PARAM.exp();
+			}
 
-		if (req.getChannelType() == null) {
-			throw PayExceptionCode.ERROR_ILL_PARAM.exp();
+			ChannelHandler channleService = getChannleService(req.getChannelType());
+
+			channleService.payoutHandler(req, binder);
+		} catch (SocketTimeoutException e) {
+			binder.setException(e);
+			binder.setResult(PayExceptionCode.WARN_TIMEOUT);
+		} catch (BusiException e) {
+			binder.setException(e);
+			binder.setResult(e.getCode(), e.getMessage());
+		} catch (Exception e) {
+			binder.setException(e);
+			binder.setResult(PayExceptionCode.ERROR_FAIL);
 		}
-
-		ChannelHandler channleService = getChannleService(req.getChannelType());
-
-		channleService.payoutHandler(req, binder);
 
 		return binder;
 	}

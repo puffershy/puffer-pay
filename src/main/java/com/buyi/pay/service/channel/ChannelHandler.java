@@ -8,5 +8,5 @@ public interface ChannelHandler {
 
 	public ChannelType getChannelType();
 
-	public void payoutHandler(PayoutReq req, DataBinder binder);
+	public void payoutHandler(PayoutReq req, DataBinder binder) throws Exception;
 }

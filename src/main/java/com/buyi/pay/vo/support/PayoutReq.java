@@ -1,5 +1,7 @@
 package com.buyi.pay.vo.support;
 
+import java.util.Date;
+
 import com.buyi.pay.common.enums.ChannelType;
 
 /**
@@ -13,8 +15,16 @@ public class PayoutReq {
 	/** 支付通道 */
 	private ChannelType channelType;
 
+	/** 商户号 */
+	private String merchantCode;
+
 	/** 业务流水号 */
 	private String busiId;
+
+	/** 订单时间 */
+	private Date orderTime;
+
+	private String userId;
 
 	/** 收款银行卡 */
 	private String inCardNo;
@@ -37,12 +47,36 @@ public class PayoutReq {
 		this.channelType = channelType;
 	}
 
+	public String getMerchantCode() {
+		return merchantCode;
+	}
+
+	public void setMerchantCode(String merchantCode) {
+		this.merchantCode = merchantCode;
+	}
+
 	public String getBusiId() {
 		return busiId;
 	}
 
 	public void setBusiId(String busiId) {
 		this.busiId = busiId;
+	}
+
+	public Date getOrderTime() {
+		return orderTime;
+	}
+
+	public void setOrderTime(Date orderTime) {
+		this.orderTime = orderTime;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getInCardNo() {

@@ -13,12 +13,20 @@ public enum PayExceptionCode {
 
 	WARN_DEALING("1002", "处理中"),
 
+	WARN_UNKNOWN("1999", "未知异常"),
+
+	
+	
+	
 	ERROR_NOT_SUPPORT_CHANNEL("2001", "不支持的通道"),
 
 	ERROR_NOT_FOUND_ORDER("2002", "没有相应订单"),
 
 	ERROR_ILL_PARAM("2003", "非法参数"),
+	
+	ERROR_DUPLICATE("2004","重复"),
 
+	ERROR_FAIL("2999","失败"),
 	/** 网络异常 */
 	ERROR_NET("9999", "网络异常");
 

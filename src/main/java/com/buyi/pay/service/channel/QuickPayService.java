@@ -19,4 +19,10 @@ public class QuickPayService extends AbstractChannelHandler {
 		return ChannelType.QUICK_PAY;
 	}
 
+	@Override
+	public <T> T getChannelConfig(String merchantCode) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
